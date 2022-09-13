@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from PIL import ImageTk, Image
-from constants import *
+from ImageAndText import *
 
 
 class App(tk.Tk):
@@ -24,7 +24,7 @@ class App(tk.Tk):
   def set_output_canvas(self):
     self.create_label("Output", OUT_CANVAS_X, OUT_CANVAS_Y-20)
     self.out_canvas = tk.Canvas(self, height=OUT_CANVAS_H, width=OUT_CANVAS_W, bg='white')
-    self.bg_ = self.load_image(IMAGE_PATH)
+    self.bg_ = self.load_image(OUT_IMAGE_PATH)
     self.out_canvas.create_image(0, 0,anchor=NW, image=self.bg_)
     self.out_canvas.place(x=OUT_CANVAS_X, y=OUT_CANVAS_Y)
 
