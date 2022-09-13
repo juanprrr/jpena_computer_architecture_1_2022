@@ -1,0 +1,13 @@
+TITLE         = 'Proyecto 1 - Arqui'
+RESOLUTION    = '900x600'
+MAIN_CANVAS_H = 512
+MAIN_CANVAS_W = 512
+MAIN_CANVAS_X = 25
+MAIN_CANVAS_Y = 30
+GRID_SIZE     = 128
+OUT_CANVAS_X  = 590
+OUT_CANVAS_Y  = 158
+OUT_CANVAS_H  = 256
+OUT_CANVAS_W  = 256
+IMAGE_PATH    = "proyecto_1/bird.png"
+OUT_IMAGE_PATH= "proyecto_1/bird2.png"
