@@ -12,3 +12,7 @@ OUT_CANVAS_W  = 256
 IMAGE_PATH    = "proyecto_1/resources/bird.png"
 OUT_IMAGE_PATH= "proyecto_1/resources/result.png"
 TEXT_PATH     = "proyecto_1/resources/test.txt"
+GRID_NM0      = 128
+GRID_NM1      = 128 + GRID_NM0
+GRID_NM2      = 128 + GRID_NM1
+GRID_NM3      = 128 + GRID_NM2

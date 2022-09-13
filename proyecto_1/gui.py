@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import *
 from PIL import ImageTk, Image
 from ImageAndText import *
-
+from ImageAndText import grid_location
 
 class App(tk.Tk):
   def __init__(self):
@@ -29,7 +29,7 @@ class App(tk.Tk):
     self.out_canvas.place(x=OUT_CANVAS_X, y=OUT_CANVAS_Y)
 
   def load_image(self, image_path):
-    self.pic = ImageTk.PhotoImage(Image.open(image_path))
+    self.pic = ImageTk.PhotoImage(Image.open(image_path).convert('L'))
     return self.pic
    
   def create_grid(self, event=None):
@@ -53,6 +53,7 @@ class App(tk.Tk):
     self.currentx = self.main_canvas.canvasx(event.x)
     self.currenty = self.main_canvas.canvasy(event.y)
     print("current_x, current_y", self.currentx, self.currenty)
+    grid_location(self.currentx, self.currenty)
 
 if __name__ == "__main__":
   app = App()
