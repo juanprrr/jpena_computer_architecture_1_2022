@@ -24,7 +24,7 @@ module procesadorTest();
 	
 	
 	initial begin 
-		#5; reset = 1; #1; reset = 0;
+		#10; reset = 1; #1; reset = 0;
 		
 	end
 			  
