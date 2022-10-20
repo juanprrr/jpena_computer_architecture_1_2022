@@ -23,7 +23,7 @@ module ffregfile #(parameter WIDTH = 32)
 					output logic 		 		ALUSrcE,
 					output logic [1:0] 		FlagWriteE,
 					output logic [3:0] 		CondE,
-					output logic [WIDTH-1:0] SrcE,
+					output logic [WIDTH-1:0] SrcAE,
 					output logic [WIDTH-1:0] WriteDataE,
 					output logic [3:0]			WA3E,
 					output logic [WIDTH-1:0] ExtImmE					
@@ -40,7 +40,7 @@ module ffregfile #(parameter WIDTH = 32)
 			ALUSrcE		<= 0;
 			FlagWriteE	<= 0;
 			CondE			<= 0;
-			SrcE			<= 0;
+			SrcAE			<= 0;
 			WriteDataE	<= 0;
 			WA3E			<= 0;
 			ExtImmE		<= 0;
@@ -56,7 +56,7 @@ module ffregfile #(parameter WIDTH = 32)
 			ALUSrcE		<= ALUSrcD;
 			FlagWriteE	<= FlagWriteD;
 			CondE			<= CondD;
-			SrcE			<= SrcD;
+			SrcAE			<= SrcA;
 			WriteDataE	<= WriteDataD;
 			WA3E			<= WA3D;
 			ExtImmE		<= ExtImmD;

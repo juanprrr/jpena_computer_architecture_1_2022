@@ -53,7 +53,7 @@ module pipelinedProcessor(
 	logic [1:0] FlagWriteE;
 	logic [3:0] FlagsNext;
 	logic [3:0] FlagsE, CondE, WA3E, ALUFlagsE;
-	logic [31:0] ExtImmE, SrcAE, SrcBE, WriteDataE, ALUResultE, ;
+	logic [31:0] ExtImmE, SrcAE, SrcBE, WriteDataE, ALUResultE;
 	
 	ffregfile id_rm_segment(PCSrcD, RegWriteD, MemtoRegD,MemWriteD, ALUControlD,
 									BranchD, ALUSrcD, FlagWriteD, InstrD[31:28],
@@ -73,7 +73,14 @@ module pipelinedProcessor(
 						  FlagWriteE, PCSrcE, RegWriteE, MemWriteE, BranchE,
 						  PCSrcU, RegWriteU, MemWriteU, FlagsNext);
 
+	//Data memory segment
+	logic	PCSrcM, RegWriteM,MemtoRegM, MemWriteM;
+	logic [3:0] WA3M;
+	logic [31:0] ALUOutM, WriteDataM;
 	
+	ffdatamem dmem_segment(clk, reset, PCSrcU, RegWriteU,MemtoRegE, MemWriteU,
+									ALUResultE, WriteDataE, WA3E, 
+									PCSrcM, RegWriteM,MemtoRegM, MemWriteM, ALUOutM, WriteDataM, WA3M);
 	
 	
 endmodule
