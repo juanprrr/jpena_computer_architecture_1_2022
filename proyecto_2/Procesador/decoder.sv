@@ -3,11 +3,11 @@ module decoder(input logic [1:0] Op,
 					input logic [3:0] Rd,
 					output logic [1:0] FlagW,
 					output logic PCS, RegW, MemW,
-					output logic MemtoReg, ALUSrc,
+					output logic MemtoReg, ALUSrc, Branch,
 					output logic [1:0] ImmSrc, RegSrc, ALUControl); // RegSrc[1]->  Selector del MUX de RA2| RegSrc[0]-> Selector del MUX de RA1
 					
 	logic [9:0] controls;
-	logic Branch, ALUOp;
+	logic ALUOp;
 	
 	// Main Decoder
 	always_comb

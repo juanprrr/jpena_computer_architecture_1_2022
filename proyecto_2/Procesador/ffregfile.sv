@@ -1,25 +1,64 @@
-module ffregfile #(parameter WIDTH = 8)
+module ffregfile #(parameter WIDTH = 32)
 					(input logic clk, reset,
-					input logic [WIDTH-1:0] d,
-					input logic [WIDTH-1:0] d1,
-					input logic [3:0] d2,
-					input logic [WIDTH-1:0] d3,
-					output logic [WIDTH-1:0] q,
-					output logic [WIDTH-1:0] q1,
-					output logic [3:0] q2,
-					output logic [WIDTH-1:0] q3);
+					input logic 				PCSrcD,
+					input logic 				RegWriteD,
+					input logic 		 		MemtoRegD,
+					input logic 				MemWriteD,
+					input logic [1:0] 		ALUControlD,
+					input logic 				BranchD,
+					input logic 		 		ALUSrcD,
+					input logic [1:0] 		FlagWriteD,
+					input logic [3:0] 		CondD,
+					input logic [WIDTH-1:0] SrcA,
+					input logic [WIDTH-1:0] WriteDataD,
+					input logic [3:0]			WA3D,
+					input logic [WIDTH-1:0] ExtImmD,
+
+					output logic 				PCSrcE,
+					output logic 				RegWriteE,
+					output logic 		 		MemtoRegE,
+					output logic 				MemWriteE,
+					output logic [1:0] 		ALUControlE,
+					output logic 				BranchE,
+					output logic 		 		ALUSrcE,
+					output logic [1:0] 		FlagWriteE,
+					output logic [3:0] 		CondE,
+					output logic [WIDTH-1:0] SrcE,
+					output logic [WIDTH-1:0] WriteDataE,
+					output logic [3:0]			WA3E,
+					output logic [WIDTH-1:0] ExtImmE					
+					);
 					
 	always_ff @(posedge clk, posedge reset)
 		if (reset) begin
-			q <= 0;
-			q1<= 0;
-			q2<= 0;
-			q3<= 0;
+			PCSrcE 		<= 0;
+			RegWriteE 	<= 0;
+			MemtoRegE	<= 0;
+			MemWriteE	<= 0;
+			ALUControlE	<= 0;
+			BranchE		<= 0;
+			ALUSrcE		<= 0;
+			FlagWriteE	<= 0;
+			CondE			<= 0;
+			SrcE			<= 0;
+			WriteDataE	<= 0;
+			WA3E			<= 0;
+			ExtImmE		<= 0;
+			
 		end
 		else begin
-			q <= d;
-			q1 <= d1;
-			q2 <= d2;
-			q3 <= d3;
+			PCSrcE 		<= PCSrcD;
+			RegWriteE 	<= RegWriteD;
+			MemtoRegE	<= MemtoRegD;
+			MemWriteE	<= MemWriteD;
+			ALUControlE	<= ALUControlD;
+			BranchE		<= BranchD;
+			ALUSrcE		<= ALUSrcD;
+			FlagWriteE	<= FlagWriteD;
+			CondE			<= CondD;
+			SrcE			<= SrcD;
+			WriteDataE	<= WriteDataD;
+			WA3E			<= WA3D;
+			ExtImmE		<= ExtImmD;
 		end
 endmodule

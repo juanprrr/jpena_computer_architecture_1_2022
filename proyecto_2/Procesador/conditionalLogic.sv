@@ -2,8 +2,9 @@ module conditionalLogic(input logic clk, reset,
 					  input logic [3:0] Cond,		//Código que viene de la instrucción en ejecución.
 					  input logic [3:0] ALUFlags, //Flags (NZCV) que vienen desde la ALU. ALUFlags[3:2]-> NZ | ALUFlags[1:0]-> CV
 					  input logic [1:0] FlagW, // FlaW[0] -> Para Carry y Overflow Flags. | FlaW[1] -> Para Negative y Zero Flags.
-					  input logic PCS, RegW, MemW,
-					  output logic PCSrc, RegWrite, MemWrite);
+					  input logic PCS, RegW, MemW, BranchE,
+					  output logic PCSrc, RegWrite, MemWrite, 
+					  output logic [3:0] FlagsNext);
 
 	//Salida del AND para definir si se tienen o no que actualizar los Flags. FlaWrite[0]-> Para C y V.|FlaWrite[1]-> Para N y Z.
 	logic [1:0] FlagWrite;
@@ -21,6 +22,7 @@ module conditionalLogic(input logic clk, reset,
 	assign FlagWrite = FlagW & {2{CondEx}};
 	assign RegWrite = RegW & CondEx;
 	assign MemWrite = MemW & CondEx;
-	assign PCSrc = PCS & CondEx;
+	assign PCSrc = (PCS & CondEx);
+	assign FlagsNext = Flags;
 	
 endmodule
