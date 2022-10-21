@@ -23,19 +23,7 @@ module instructionMemory(input logic[7:0] address, //Memory Address in range [0-
 			8'h28: data = 32'hE2847003; // ADD R7,R4,#3		; R7 = 7+3 = 10 = 1010
 			8'h2c: data = 32'hE0216007; // EOR R6,R1, R7		; R6 = 0010 XOR 1010 = 1000 = 8
 			
-			8'h30: data = 32'hE0845004; // ADD R5, R4,R4 (FIN)	R5 = 14 
-			
-			8'h10: data = 32'h00000000; // 
-			8'h14: data = 32'h00000000; // 
-			8'h18: data = 32'h00000000; // 
-			8'h1c: data = 32'h00000000; // 
-			
-			8'h20: data = 32'h00000000; // 
-			8'h24: data = 32'h00000000; //   
-			8'h28: data = 32'h00000000; //  
-			8'h2c: data = 32'h00000000; // 
-			
-			8'h30: data = 32'h00000000; // 
+			8'h30: data = 32'hE0845004; // ADD R5, R4,R4 (FIN)	R5 = 14  
 			8'h34: data = 32'h00000000; //
 			8'h38: data = 32'h00000000; //
 			8'h3c: data = 32'h00000000; //
