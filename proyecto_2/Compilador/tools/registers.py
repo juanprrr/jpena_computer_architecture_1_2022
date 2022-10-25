@@ -9,14 +9,14 @@ class Register:
     def getValue(self):
         return self.__value
     
-    def getByte(self):
-        return int(bin(self.__value)[:8])
+    # def getByte(self):
+    #     return int(bin(self.__value)[:8])
     
-    def getWord(self):
-        return int(bin(self.__value)[:16])
+    # def getWord(self):
+    #     return int(bin(self.__value)[:16])
 
 class RegisterSet:
-    def __init__(self, number=32):
+    def __init__(self, number=17):
         self.__number = number
         self.__registers = []
         self.__createRegisters()
