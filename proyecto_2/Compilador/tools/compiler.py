@@ -1,27 +1,48 @@
-# Operation code
+#OpeRNtion Code
+
 op = {
-    'ADD': '000',
-    'SUB': '000',
-    'CMP': '001',
-    'LDR': '010',
-    'STR': '011',
-    'JEQ': '100',
-    'JNE': '101',
-    'JMP': '110',
-    'NOP': '111'
+    'SUM': '',
+    'SUMI': '',
+    'RST': '',
+    'RSTI': '',
+    'MOV': '',
+    'MOVI': '',
+    'COM': '',
+    'COMI': '',
+    'GEM': '',
+    'CDM': '',
+    'SI': '',
+    'SIQ': '',
+    'SME': '',
+    'SMA': '',
+    'SMEI': '',
+    'SMAI': ''  
 }
 
 # Functions
 functions = {
     'RR': {
-        'ADD': '00',
-        'SUB': '10',
-        'CMP': '10'
+        'SUM': '',
+        'SUMI': '',
+        'RST': '',
+        'MOV': '',
+        'COM': ''
     },
     'RK': {
-        'ADD': '01',
-        'SUB': '11',
-        'CMP': '11'
+        'SUMI': '',
+        'RSTI': '',
+        'MOVI': '',
+        'COMI': '',
+        'MOVI': ''
+    },
+    'MM': {
+        'GEM': '',
+        'CDM': ''
+    },
+    'IC': {
+        'RI': '',
+        'RIQ': '',
+        'RMQ': ''
     }
 }
 
@@ -30,56 +51,35 @@ class Compiler:
         if instruction['type'] == 'RR':
             opCode = op[instruction['I']]
             rd = bin(int(instruction['RD'][1:]))[2:]
-            ra = bin(int(instruction['RA'][1:]))[2:]
-            rb = bin(int(instruction['RB'][1:]))[2:]
-            k = '0'*12
+            rn = bin(int(instruction['RN'][1:]))[2:]
+            rm = bin(int(instruction['RM'][1:]))[2:]
 
-            return f'{opCode}-{"0"*(5 - len(rd)) + rd}-{"0"*(5 - len(ra)) + ra}-' +\
-                   f'{"0"*(5 - len(rb)) + rb}-{k}-{functions["RR"][instruction["I"]]}'
+            return f'{opCode}-{functions["RR"][instruction["I"]]}-{"0"*(4 - len(rd)) + rd}-{"0"*(4 - len(rn)) + rn}-' +\
+                   f'{"0"*(4 - len(rm)) + rm}'
+
         elif instruction['type'] == 'RK':
             opCode = op[instruction['I']]
             rd = bin(int(instruction['RD'][1:]))[2:]
-            ra = bin(int(instruction['RA'][1:]))[2:]
-            rb = '0'*5
-            k = instruction['K']
+            rn = bin(int(instruction['RN'][1:]))[2:]
+            k = '0'*4
 
-            if k[:2] == '0x':
-                k = bin(int(instruction['K'], 16))[2:]
-            elif k[:2] in '0b0B':
-                k = k[2:].lower()
-            elif k[-1] in 'Hh':
-                k = bin(int(instruction['K'][:2]))[2:]
-            elif k[-1] in 'Bb':
-                k = k[:-1]
-            else:
-                k = bin(int(instruction['K']))[2:]
+            return f'{opCode}-{functions["RK"][instruction["I"]]}-{"0"*(4 - len(rd)) + rd}-{"0"*(4 - len(rn)) + rn}-' +\
+                   f'{"0"*(4 - len(k)) + k}'
 
-            return f'{opCode}-{("0"*(5 - len(rd)) + rd)}-{"0"*(5 - len(ra)) + ra}-' +\
-                   f'{rb}-{"0"*(12 - len(k)) + k}-{functions["RK"][instruction["I"]]}'
-        elif instruction['type'] == 'LS':
+        elif instruction['type'] == 'MM':
             opCode = op[instruction['I']]
             rd = bin(int(instruction['RD'][1:]))[2:]
-            ra = bin(int(instruction['RA'][1:]))[2:]
-            k = instruction['K']
+            rn = bin(int(instruction['RN'][1:]))[2:]
+            k = '0'*6
 
-            if k[:2] == '0x':
-                k = bin(int(instruction['K'][2:], 16))[2:]
-            elif k[:2] in '0b0B':
-                k = k[2:].lower()
-            elif k[-1] in 'Hh':
-                k = bin(int(instruction['K'][:-1]))[2:]
-            elif k[-1] in 'Bb':
-                k = k[:-1]
-            else:
-                k = bin(int(instruction['K']))[2:]
+            return f'{opCode}-{functions["MM"][instruction["I"]]}-{("0"*(4 - len(rd)) + rd)}-{"0"*(4 - len(rn)) + rn}-' +\
+                   f'{"0"*(6 - len(k)) + k}'
 
-            return f'{opCode}-{("0"*(5 - len(rd)) + rd)}-{"0"*(5 - len(ra)) + ra}-' +\
-                   f'{"0"*(19 - len(k)) + k}'
         else:
             opCode = op[instruction['I']]
             flag = bin(int(instruction['flag'], 16))[2:]
 
-            return f'{opCode}-{("0"*(29 - len(flag)) + flag)}'
+            return f'{opCode}--{functions["MM"][instruction["I"]]}-{("0"*(12 - len(flag)) + flag)}'
 
     def compile(self, lines: list):
         output = []
