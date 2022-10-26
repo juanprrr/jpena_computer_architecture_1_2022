@@ -19,7 +19,7 @@ class XAsmIde(QMainWindow):
     def __init__(self):
         super(XAsmIde, self).__init__()
         self.__running = True
-        self.__title = 'XAsm Editor v0.1.1'
+        self.__title = 'XAsm Editor v0.1.2'
         self.__file = XAsmFile()
         # If code was checked
         self.__checked = False
@@ -37,8 +37,8 @@ class XAsmIde(QMainWindow):
         # Components
         # Registers table
         self.__tableRegisters = self.findChild(QTableWidget, 'tableRegisters')
-        # 32 registers
-        registers = RegisterSet(32)
+        # 17 registers
+        registers = RegisterSet(17)
         self.__setRegistersValue(registers.getRegisters())
 
         # Memory table
