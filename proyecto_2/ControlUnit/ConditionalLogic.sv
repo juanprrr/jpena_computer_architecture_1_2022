@@ -1,5 +1,26 @@
-module ConditionalLogic(input logic clk, reset,
-					  input logic [2:0] Cond,		//Código que viene de bits 13-11 desde Inst en instrucciones de control
+/*
+	Total inputs: currentInstr[16:11]
+	
+	Tipo = currentInstr[16:15]
+	
+	If Tipo == 00 // Data instructions
+		I      = currentInstr[14]
+		Instr  = currentInstr[13:12]
+		unused = currentInstr[11]
+			
+	If Tipo == 01 // Memory instructions
+		unused = currentInstr[14:13]
+		Instr  = currentInstr[12]
+		unused = currentInstr[11]
+	
+	If Tipo == 10 // Branch instructions
+		B      = currentInstr[14]
+		Instr  = currentInstr[13:11]
+*/
+
+
+module ConditionalLogic(input logic clk, reset, 
+					  input logic [13:11] Cond,		//Código que viene de bits 13-11 desde Inst en instrucciones de control
 					  input logic [3:0] ALUFlags, //Flags (NZCV) que vienen desde la ALU. ALUFlags[3:2]-> NZ | ALUFlags[1:0]-> CV
 					  input logic [1:0] FlagW, // FlaW[0] -> Para Carry y Overflow Flags. | FlaW[1] -> Para Negative y Zero Flags.
 					  input logic PCS, RegW, MemW, NoWrite,
