@@ -2,7 +2,7 @@
 module controllerTest();
 
 	logic clk,reset;
-	logic [16:11] Instr;
+	logic [16:0] Instr;
 	logic [3:0] ALUFlags; //NZCV
 						
 	logic [1:0] RegSrc; 
@@ -13,7 +13,7 @@ module controllerTest();
 	logic MemWrite, MemtoReg;
 	logic PCSrc;
 	
-	controller ctllr(clk, reset, Instr, ALUFlags, 
+	controller ctllr(clk, reset, Instr[16:11], ALUFlags, 
 						  RegSrc, RegWrite, ImmSrc, ALUSrc, ALUControl, MemWrite, MemtoReg, PCSrc);
 
 
@@ -32,11 +32,27 @@ module controllerTest();
 		
 		ALUFlags = 0000; //Se dejarán las Flags en 0 pues se probará el CMP
 				
-		Instr = 6'b00_0_00_0010_0001_0011; #5; // ADD R1,R2,R3
-		Instr = 6'b00_0_00_xxxx_0101_1001; #5; // MOV R7,R9
-		Instr = 6'b00_0_10_xxxx_0001_0101; #5; // CMP R1,R7
-		Instr = 6'b00_1_01_1100_1010_0010; #5; // SUB R10,R12,#2
+		Instr = 17'b00_0_00_0010_0001_0011; #10; // SUM R1,R2,R3
+		Instr = 17'b00_0_00_1110_0101_1001; #10; // MOV R7,R9 ; se usa Rn = 14 que vale 0 por defecto
+		Instr = 17'b00_0_10_xxxx_0001_0101; #10; // COM R1,R7
+		Instr = 17'b00_0_01_1100_1010_0010; #10; // RST R10,R12,#2
 		
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> EJEMPLO 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		//												Instrucciones de memoria
+		
+		ALUFlags = 0000; //Se dejarán las Flags en 0 
+				
+		Instr = 17'b01_00_0_0010_0001_0000; #10; // GEM R1,0(R2)
+		Instr = 17'b01_00_1_0111_1001_0100; #10; // CDM R7,4(R9)
+
+		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> EJEMPLO 3 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		//												Instrucciones de control
+		// flags N y V son las de interés, seteadas en 0, 
+		// así la condición SMAI se cumple y CondEx = 1, SMEI no se cumple entonces CondEx = 0
+
+		ALUFlags = 0000; 
+		Instr = 17'b10_1_101_01000010000; #10; // SMAI LABEL
+		Instr = 17'b10_1_100_01000010000; #10; // SMEI LABEL 
 		
 		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> EJEMPLO 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 		//----------------------------------------- CASO 1-----------------------------------------

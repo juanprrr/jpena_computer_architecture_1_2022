@@ -20,6 +20,7 @@
 
 
 module ConditionalLogic(input logic clk, reset, 
+					  input logic [16:15] op,
 					  input logic [13:11] Cond,		//Código que viene de bits 13-11 desde Inst en instrucciones de control
 					  input logic [3:0] ALUFlags, //Flags (NZCV) que vienen desde la ALU. ALUFlags[3:2]-> NZ | ALUFlags[1:0]-> CV
 					  input logic [1:0] FlagW, // FlaW[0] -> Para Carry y Overflow Flags. | FlaW[1] -> Para Negative y Zero Flags.
@@ -39,7 +40,7 @@ module ConditionalLogic(input logic clk, reset,
 	flopenr #(2) flagreg0(clk, reset, FlagWrite[0], ALUFlags[1:0], Flags[1:0]); // CV
 	
 	// Write controls are conditional
-	conditionCheck condCheck(Cond, Flags, CondEx);
+	conditionCheck condCheck(op, Cond, Flags, CondEx);
 	
 	assign FlagWrite = FlagW & {2{CondEx}};
 	assign RegWrite = RegW & CondEx & ~NoWrite;

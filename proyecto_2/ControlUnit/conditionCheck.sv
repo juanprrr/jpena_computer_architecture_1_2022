@@ -1,14 +1,26 @@
-module conditionCheck(input logic [2:0] Cond,
+module conditionCheck(input logic [1:0] op,
+							 input logic [2:0] Cond, 
 							 input logic [3:0] Flags,
 							 output logic CondEx);
 					  
 	logic neg, zero, carryF, overflow, ge;
+	logic [2:0] condAux;
 	
 	assign {neg, zero, carryF, overflow} = Flags;
 	assign ge = (neg ^ overflow);
 	
 	always_comb
-		case(Cond)
+		casex(op)
+		
+			2'b00: condAux = 3'b000;
+			2'b01: condAux = 3'b000;
+			2'b10: condAux = Cond;
+			default: condAux = 3'bx;
+		endcase
+		
+		
+	always_comb
+		case(condAux)
 			3'b001: CondEx = zero; 				// EQ
 //			3'b001: CondEx = ~zero;				// NE
 //			4'b0010: CondEx = carryF;				// CS

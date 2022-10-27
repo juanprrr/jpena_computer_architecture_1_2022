@@ -38,7 +38,7 @@ module controller(input 	logic 			clk, reset,
 					PCS, 
 					RegW, MemW, MemtoReg, ALUSrc,NoWrite, ImmSrc, RegSrc, ALUControl);
 	
-	ConditionalLogic cl(clk, reset, currentInstr[13:11], ALUFlags,
+	ConditionalLogic cl(clk, reset,currentInstr[16:15], currentInstr[13:11], ALUFlags,
 							  FlagW, PCS, RegW, MemW, NoWrite,
 							  PCSrc, RegWrite, MemWrite);
 	
