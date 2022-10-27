@@ -32,10 +32,10 @@ module controllerTest();
 		
 		ALUFlags = 0000; //Se dejarán las Flags en 0 pues se probará el CMP
 				
-		Instr = 6'b00_0_00_0010_0001_0011; #5 // ADD R1,R2,R3
-		Instr = 6'b00_0_00_xxxx_0101_1001; #5 // MOV R7,R9
-		Instr = 6'b00_0_10_xxxx_0001_0101; #5 // CMP R1,R7
-		Instr = 6'b00_1_01_1100_1010_0010; #5 // SUB R10,R12,#2
+		Instr = 6'b00_0_00_0010_0001_0011; #5; // ADD R1,R2,R3
+		Instr = 6'b00_0_00_xxxx_0101_1001; #5; // MOV R7,R9
+		Instr = 6'b00_0_10_xxxx_0001_0101; #5; // CMP R1,R7
+		Instr = 6'b00_1_01_1100_1010_0010; #5; // SUB R10,R12,#2
 		
 		
 		// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> EJEMPLO 2 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
