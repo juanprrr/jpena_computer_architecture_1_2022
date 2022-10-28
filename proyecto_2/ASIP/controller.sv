@@ -33,7 +33,7 @@ module controller(input 	logic 			clk, reset,
 	logic PCS,RegW, MemW, NoWrite;
 
 							//op		funct			
-	decoder dec(currentInstr[16:15], currentInstr[14:12],
+	decoder dec(currentInstr[16:15], currentInstr[14:12], currentInstr[7:4],
 					FlagW, 
 					PCS, 
 					RegW, MemW, MemtoReg, ALUSrc,NoWrite, ImmSrc, RegSrc, ALUControl);

@@ -13,11 +13,11 @@
 module regfile(input logic clk,
 					input logic we3, 	//Señal de Write Enable (permitir escritura)
 					input logic [3:0] ra1, ra2, wa3,
-					input logic [17:0] wd3, r15, //wd3: Valor a escribirse en el registro señalado por Wa3. si we3 = 1 
-					output logic [17:0] rd1, rd2);
+					input logic [16:0] wd3, r15, //wd3: Valor a escribirse en el registro señalado por Wa3. si we3 = 1 
+					output logic [16:0] rd1, rd2);
 	
-	logic [17:0] rf[14:0]; //15 registros de 32-bit cada uno de ellos(De R0 a R14). Cada registro se accede de la forma: rf[<numeroDelRegistro>]
-
+	logic [16:0] rf[14:0]; //15 registros de 32-bit cada uno de ellos(De R0 a R14). Cada registro se accede de la forma: rf[<numeroDelRegistro>]
+	//initial rf[14] = 17'b0;
 	
 	
 	//Para la ESCRITURA en el Registro señalado en el Puerto A3 unicamente cuando se de el posedge del CLK y el enable este en 1.
@@ -27,5 +27,6 @@ module regfile(input logic clk,
 	//Para la LECTURA del contenido en los registros. 
 	assign rd1 = (ra1 == 4'b1111) ? r15 : rf[ra1];
 	assign rd2 = (ra2 == 4'b1111) ? r15 : rf[ra2];
+	
 	
 endmodule

@@ -6,7 +6,7 @@ module mux4a1 #(parameter WIDTH = 4)
 		case(s)
 			2'd0: out = d0;
 			2'd1: out = d1;
-			2'd2: out = 4'dz;
-			2'd3: out = 4'dz;
+			2'd2: out = 4'dx;
+			2'd3: out = 4'dx;
 		endcase
 endmodule
