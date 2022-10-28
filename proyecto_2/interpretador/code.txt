@@ -1,10 +1,16 @@
 _start
-SUM R1, R2, R3
-RST R3, R4, R5
+RST R14, R15, R15
+MOVI R2, #2 
+MOVI R1, #7
+GEM R2, R1
+CDM R4, R1
+SUM R5, R4, R2
 SI _branch3
 _branch2
-COM R6, R7
+COM R2, R4
 SI _branch3
 _branch3
-MOV R8, R9
-MOV R8, R9
+MOV R8, R2
+MOV R8, R2
+MOV R4, R14
+MOV R5, R14
