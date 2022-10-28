@@ -108,7 +108,7 @@ module datapathTestBench();
 		ALUControl = 00; MemWrite = 1; MemtoReg = 1'bx; PCSrc = 0;
 		#10;
 		
-		//CDM R4, 0(R1)
+		//CDM R4, 0(R1)   R1 dir 7: 2
 		
 		Instr = 17'b01_00_1_0001_0100_0000; ReadData = 17'b00_00_0_0000_0000_0010;
 		
@@ -117,11 +117,14 @@ module datapathTestBench();
 		#10;
 		
 		//SUM R5, R4, R2
-		Instr = 17'b00_0_01_0100_0101_0010;
+		Instr = 17'b00_0_00_0100_0101_0010;
 		RegSrc = 2'b00; RegWrite = 1; ImmSrc =  2'bx; ALUSrc =  0;
-		ALUControl = 2'b01; MemWrite = 0; MemtoReg = 0; PCSrc = 0;
+		ALUControl = 2'b00; MemWrite = 0; MemtoReg = 0; PCSrc = 0;
 		#10;	
-
-		
+		// SI _branch3
+		Instr = 17'b10_0_000_00000000001;
+		RegSrc = 2'bx1; RegWrite = 0; ImmSrc =  2'b10; ALUSrc =  1;
+		ALUControl = 2'b00; MemWrite = 0; MemtoReg = 0; PCSrc = 1;
+		#10;
 		end
 endmodule
