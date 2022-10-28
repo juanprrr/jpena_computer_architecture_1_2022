@@ -61,34 +61,32 @@ def interpretador():
                 data.insert(2, "XX")
             codeList.append(data)
         print(codeList)
-    
+
+    getbinary = lambda x, n: format(x, 'b').zfill(n)
     with open("outCode.txt",'w') as f:
+        contInstr = -1
         for idx, instruction in enumerate(codeList):
             binLine = ''
-            
             if len(instruction) > 1:
-                print(instruction)
-                print(len(instruction))
+                contInstr+=1
+                address = contInstr*4
+                address = getbinary(address, 17)
                 
                 if instruction[0] == "SI" or instruction[0] == "SIQ" or instruction[0] == "SME" or instruction[0] == "SMA" or instruction[0] == "SMEI" or instruction[0] == "SMAI":
                     binLine = dict[instruction[0]]
                     contLabel = 0
                     dist = 0
-                    destIdx = codeList.index([instruction[1]]) + 1
-                    print(destIdx)
-                    getbinary = lambda x, n: format(x, 'b').zfill(n)
+                    destIdx = codeList.index([instruction[1]]) + 1                    
+                    
                     n = 0
                     i = idx
                     while n < 2:
-                        print(i)
+            
                         if len(codeList[i+1]) != 1:
                             n+=1
-                        i+=1
-                        
+                        i+=1     
                             
-                    print(i)
                     if i < destIdx:
-                        print("i<destIdx")
                         n = i
                         while n < destIdx:
                             if len(codeList[n]) == 1:
@@ -98,7 +96,6 @@ def interpretador():
                         dist = destIdx-i-contLabel
                         binLine = binLine + getbinary(dist, 11)   
                     else:
-                        print("i>destIdx")
                         n=1
                         while n >= destIdx:
                             if n>len(codeList)-1:
@@ -112,8 +109,9 @@ def interpretador():
                 else:
                     for element in instruction:
                         binLine = binLine + dict[element]
-                    
-                binLine = binLine + ('\n')
+                
+                binLine = "17b'"+address+": data = 17b'" + binLine + ('\n')
+                
                 f.write(binLine)
 
 # Function to find two's complement
