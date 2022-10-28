@@ -20,6 +20,7 @@
 
 module controller(input 	logic 			clk, reset,
 						input 	logic [16:11] 	currentInstr,
+						input 	logic [7:4] 	Rd,
 						input 	logic [3:0] 	ALUFlags, //NZCV
 						output 	logic [1:0] 	RegSrc, // RegSrc[1]->  Selector del MUX de RA2| RegSrc[0]-> Selector del MUX de RA1
 						output 	logic 			RegWrite,
@@ -29,11 +30,13 @@ module controller(input 	logic 			clk, reset,
 						output 	logic 			MemWrite, MemtoReg,
 						output 	logic 			PCSrc);
 						
+						
+						
 	logic [1:0] FlagW; //FlaW[0]-> Para C y V.|FlaW[1]-> Para N y Z.
 	logic PCS,RegW, MemW, NoWrite;
 
-							//op		funct			
-	decoder dec(currentInstr[16:15], currentInstr[14:12], currentInstr[7:4],
+							//op		funct								//Rd
+	decoder dec(currentInstr[16:15], currentInstr[14:12], Rd,
 					FlagW, 
 					PCS, 
 					RegW, MemW, MemtoReg, ALUSrc,NoWrite, ImmSrc, RegSrc, ALUControl);

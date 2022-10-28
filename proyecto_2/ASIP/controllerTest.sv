@@ -13,7 +13,7 @@ module controllerTest();
 	logic MemWrite, MemtoReg;
 	logic PCSrc;
 	
-	controller ctllr(clk, reset, Instr[16:11], ALUFlags, 
+	controller ctllr(clk, reset, Instr[16:11], Instr[7:4], ALUFlags, 
 						  RegSrc, RegWrite, ImmSrc, ALUSrc, ALUControl, MemWrite, MemtoReg, PCSrc);
 
 
