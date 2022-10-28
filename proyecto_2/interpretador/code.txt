@@ -1,0 +1,10 @@
+_start
+SUM R1, R2, R3
+RST R3, R4, R5
+SI _branch3
+_branch2
+COM R6, R7
+SI _branch3
+_branch3
+MOV R8, R9
+MOV R8, R9
