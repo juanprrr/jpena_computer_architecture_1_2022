@@ -20,6 +20,7 @@
 
 module decoder(input logic [1:0] Tipo,
 					input logic [14:12] currentInstr, // [2:0]
+					input logic [7:4] Rd,
 					output logic [1:0] FlagW,
 					output logic PCS, RegW, MemW,
 					output logic MemtoReg, ALUSrc, NoWrite,
@@ -76,5 +77,5 @@ module decoder(input logic [1:0] Tipo,
 	// PC Logic
 //	assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
 	assign NoWrite = FlagW[1];
-	assign PCS = Branch;
+	assign PCS = ((Rd == 4'b1111) & RegW) | Branch;
 endmodule 
